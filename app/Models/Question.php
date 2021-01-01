@@ -44,7 +44,7 @@ class Question extends Model
      */
     public function getQuestions()
     {
-        return Question::orderBy('created_at',$this->order)->with('quiz')->paginate($this->limit);
+        return Question::orderBy('created_at', $this->order)->with('quiz')->paginate($this->limit);
     }
 
     /**
@@ -66,7 +66,7 @@ class Question extends Model
     /**
      *
      */
-    public function updateQuestion($id,$data)
+    public function updateQuestion($id, $data)
     {
         $question = Question::find($id);
         $question->question = $data['question'];
@@ -81,6 +81,6 @@ class Question extends Model
      */
     public function deleteQuestion($id)
     {
-        Question::where('id',$id)->delete();
+        Question::where('id', $id)->delete();
     }
 }

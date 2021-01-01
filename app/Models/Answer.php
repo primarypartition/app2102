@@ -23,14 +23,14 @@ class Answer extends Model
      */
     public function storeAnswer($data, $question)
     {
-    	foreach($data['options'] as $key=>$option){
-    		$is_correct =false;
-    		if($key==$data['correct_answer']){
+    	foreach($data['options'] as $key=>$option) {
+    		$is_correct=false;
+    		if($key==$data['correct_answer']) {
     			$is_correct=true;
     		}
 
     		$answer = Answer::create([
-    			'question_id'=> $question->id,
+    			'question_id'=>$question->id,
     			'answer'=>$option,
     			'is_correct'=>$is_correct
     		]);

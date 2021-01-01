@@ -1,8 +1,10 @@
 <?php
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
-use App\Question;
-use App\Answer;
+
+use App\Models\Question;
+use App\Models\Answer;
 
 class QuestionController extends Controller
 {
@@ -14,7 +16,8 @@ class QuestionController extends Controller
     public function index()
     {
         $questions = (new Question)->getQuestions();
-        return view('backend.question.index',compact('questions'));
+
+        return view('backend.question.index', compact('questions'));
     }
 
     /**
@@ -37,8 +40,9 @@ class QuestionController extends Controller
     {
         $data = $request->all();
         $question = (new Question)->storeQuestion($data);
-        $answer = (new Answer)->storeAnswer($data,$question);
-        return redirect()->route('question.index')->with('message','Question created successfully!');
+        $answer = (new Answer)->storeAnswer($data, $question);
+
+        return redirect()->route('question.index')->with('message', 'Question created successfully!');
     }
 
     /**
@@ -50,7 +54,8 @@ class QuestionController extends Controller
     public function show($id)
     {
         $question = (new Question)->getQuestionById($id);
-        return view('backend.question.show',compact('question'));
+
+        return view('backend.question.show', compact('question'));
     }
 
     /**
@@ -62,7 +67,8 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $question = (new Question)->findQuestion($id);
-        return view('backend.question.edit',compact('question'));
+
+        return view('backend.question.edit', compact('question'));
     }
 
     /**
@@ -75,9 +81,10 @@ class QuestionController extends Controller
     public function update(Request $request, $id)
     {
         $data = $this->validateForm($request);
-        $question = (new Question)->updateQuestion($id,$request);
-        $answer = (new Answer)->updateAnswer($request,$question);
-        return redirect()->route('question.show',$id)->with('message', 'Question updated successfully');
+        $question = (new Question)->updateQuestion($id, $request);
+        $answer = (new Answer)->updateAnswer($request, $question);
+
+        return redirect()->route('question.show', $id)->with('message', 'Question updated successfully');
     }
 
     /**
@@ -88,24 +95,23 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        
         (new Answer)->deleteAnswer($id);
         (new Question)->deleteQuestion($id);
-        return redirect()->route('question.index')->with('message','Question deleted successfully!');
+
+        return redirect()->route('question.index')->with('message', 'Question deleted successfully!');
     }
 
-    public function validateForm($request){
-        return $this->validate($request,[
-            'quiz'=>'required',
-            'question'=>'required',
-            'options'=>'required|array|min:3',
-            'options.*'=>'required|string|distinct',
-            'correct_answer'=>'required'
-
-        ]);
+    /**
+     *
+     */
+    public function validateForm($request)
+    {
+        return $this->validate($request, [
+                                    'quiz'=>'required',
+                                    'question'=>'required',
+                                    'options'=>'required|array|min:3',
+                                    'options.*'=>'required|string|distinct',
+                                    'correct_answer'=>'required'
+                                ]);
     }
-
- 
-
-    
 }
