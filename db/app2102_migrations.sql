@@ -38,7 +38,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2019_08_19_000000_create_failed_jobs_table',1),(4,'2019_12_14_024239_create_quizzes_table',2),(5,'2019_12_14_024303_create_questions_table',2),(6,'2019_12_14_024322_create_answers_table',2),(7,'2019_12_14_024438_create_quiz_user_table',2),(8,'2019_12_14_025713_create_results_table',2);
+INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2019_08_19_000000_create_failed_jobs_table',1),(4,'2019_12_14_024239_create_quizzes_table',1),(5,'2019_12_14_024303_create_questions_table',1),(6,'2019_12_14_024322_create_answers_table',1),(7,'2019_12_14_024438_create_quiz_user_table',1),(8,'2019_12_14_025713_create_results_table',1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-01 11:16:33
+-- Dump completed on 2021-01-01 12:59:40

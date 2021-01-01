@@ -34,7 +34,8 @@ class Question extends Model
      */
     public function storeQuestion($data)
     {
-    	$data['quiz_id'] = $data['quiz'];
+        $data['quiz_id'] = $data['quiz'];
+
     	return Question::create($data);
     }
 

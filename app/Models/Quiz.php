@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Question;
@@ -11,7 +10,7 @@ use App\Models\Result;
 
 class Quiz extends Model
 {
-    protected $fillable = [ 'name','description','minutes' ];
+    protected $fillable = ['name', 'description', 'minutes'];
 
     /**
      *
@@ -91,7 +90,7 @@ class Quiz extends Model
         $user = Result::where('user_id',$authUser)->get();
 
         foreach($user as $u) {
-            array_push($attemptQuiz,$u->quiz_id);
+            array_push($attemptQuiz, $u->quiz_id);
         }
 
         return $attemptQuiz;
