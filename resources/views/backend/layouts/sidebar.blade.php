@@ -11,8 +11,8 @@
                 </li>
                 <li>
                     <a href="{{route('quiz.create')}}">
-                        <i class="menu-icon icon-bullhorn">
-                    </i> Create Quiz </a>
+                        <i class="menu-icon icon-bullhorn"></i> Create Quiz
+                    </a>
                 </li>
                 <li>
                     <a href="{{route('quiz.index')}}">
@@ -33,6 +33,7 @@
                     </a>
                 </li>
             </ul>
+
             <!--/.widget-nav-->
             <ul class="widget widget-menu unstyled">
                 <li>
@@ -46,6 +47,7 @@
                     </a>
                 </li>
             </ul>
+
             <!--/.widget-nav-->
             <ul class="widget widget-menu unstyled">
                 <li>
@@ -59,6 +61,7 @@
                     </a>
                 </li>
             </ul>
+
             <!--/.widget-nav-->
             <ul class="widget widget-menu unstyled">
                 <li>

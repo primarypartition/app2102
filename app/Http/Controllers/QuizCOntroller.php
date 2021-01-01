@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Quiz;
+use App\Models\Quiz;
 class QuizCOntroller extends Controller
 {
     /**
@@ -14,7 +14,8 @@ class QuizCOntroller extends Controller
     public function index()
     {
         $quizzes = (new Quiz)->allQuiz();
-        return view('backend.quiz.index',compact('quizzes'));
+
+        return view('backend.quiz.index', compact('quizzes'));
     }
 
     /**
@@ -38,8 +39,8 @@ class QuizCOntroller extends Controller
         $data = $this->validateForm($request);
 
         $quiz = (new Quiz)->storeQuiz($data);
-        return redirect()->back()->with('message','Quiz created Successfully');
 
+        return redirect(route('quiz.index'))->with('message', 'Quiz created Successfully');
     }
 
     /**
@@ -62,7 +63,8 @@ class QuizCOntroller extends Controller
     public function edit($id)
     {
         $quiz = (new Quiz)->editQuiz($id);
-        return view('backend.quiz.edit',compact('quiz'));
+
+        return view('backend.quiz.edit', compact('quiz'));
     }
 
     /**
@@ -75,8 +77,9 @@ class QuizCOntroller extends Controller
     public function update(Request $request, $id)
     {
         $data = $this->validateForm($request);
-        $quiz = (new Quiz)->updateQuiz($id,$data);
-        return redirect(route('quiz.index'))->with('message','Quiz updated Successfully!');
+        $quiz = (new Quiz)->updateQuiz($id, $data);
+
+        return redirect(route('quiz.index'))->with('message', 'Quiz updated Successfully!');
     }
 
     /**
@@ -88,22 +91,29 @@ class QuizCOntroller extends Controller
     public function destroy($id)
     {
         (new Quiz)->deleteQuiz($id);
-        return redirect(route('quiz.index'))->with('message','Quiz deleted Successfully!');
 
+        return redirect(route('quiz.index'))->with('message', 'Quiz deleted Successfully!');
     }
 
-    public function question($id){
-        $quizzes = Quiz::with('questions')->where('id',$id)->get();
-        return view('backend.quiz.question',compact('quizzes'));
+    /**
+     *
+     */
+    public function question($id)
+    {
+        $quizzes = Quiz::with('questions')->where('id', $id)->get();
+
+        return view('backend.quiz.question', compact('quizzes'));
     }
 
-    public function validateForm($request){
-        return $this->validate($request,[
-
+    /**
+     *
+     */
+    public function validateForm($request)
+    {
+        return $this->validate($request, [
             'name'=>'required|string',
             'description'=>'required|min:3|max:500',
             'minutes'=>'required|integer'
         ]);
-
     }
 }
