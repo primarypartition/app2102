@@ -75,8 +75,7 @@
             <ul class="widget widget-menu unstyled">
                 <li>
                     <a class="dropdown-item" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="icon-inbox"></i> {{ __('Logout') }}
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
