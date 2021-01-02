@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -46,7 +47,7 @@ class User extends Authenticatable
     {
         $data['visible_password'] = $data['password'];
         $data['password'] = bcrypt($data['password']);
-        $data['is_admin'] =0;
+        $data['is_admin'] = 0;
 
         return User::create($data);
     }
@@ -74,7 +75,7 @@ class User extends Authenticatable
     {
         $user = User::find($id);
 
-        if($data['password']){
+        if($data['password']) {
             $user->password = bcrypt($data['password']);
             $user->visible_password = $data['password'];
         }

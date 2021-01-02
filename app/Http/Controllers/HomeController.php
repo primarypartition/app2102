@@ -8,6 +8,7 @@ use App\Models\Quiz;
 use App\Models\Result;
 
 use DB;
+
 class HomeController extends Controller
 {
     /**

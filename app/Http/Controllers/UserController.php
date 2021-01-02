@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Models\User;
+
 class UserController extends Controller
 {
     /**
@@ -14,7 +15,8 @@ class UserController extends Controller
     public function index()
     {
         $users = (new User)->allUsers();
-        return view('backend.user.index',compact('users'));
+
+        return view('backend.user.index', compact('users'));
     }
 
     /**
@@ -35,15 +37,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'name'=>'required',
             'email'=>'required|unique:users',
             'password'=>'required|min:3'
         ]);
+
         $user = (new User)->storeUser($request->all());
-        return redirect()->route('user.index')->with('message','user created successfully!');
 
-
+        return redirect()->route('user.index')->with('message', 'user created successfully!');
     }
 
     /**
@@ -66,7 +68,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = (new User)->findUser($id);
-        return view('backend.user.edit',compact('user'));
+
+        return view('backend.user.edit', compact('user'));
     }
 
     /**
@@ -81,8 +84,10 @@ class UserController extends Controller
         $this->validate($request,[
             'name'=>'required'
         ]);
-        $user = (new User)->updateUser($request->all(),$id);
-        return redirect()->route('user.index')->with('message','user updated successfully!');
+
+        $user = (new User)->updateUser($request->all(), $id);
+
+        return redirect()->route('user.index')->with('message', 'user updated successfully!');
     }
 
     /**
@@ -94,10 +99,11 @@ class UserController extends Controller
     public function destroy($id)
     {
         if(auth()->user()->id == $id){
-            return redirect()->route('user.index')->with('message','You cannot delete yourself!');
+            return redirect()->route('user.index')->with('message', 'You cannot delete yourself!');
         }
-        $user = (new User)->deleteUser($id);
-        return redirect()->route('user.index')->with('message','user deleted successfully!');
 
+        $user = (new User)->deleteUser($id);
+
+        return redirect()->route('user.index')->with('message', 'user deleted successfully!');
     }
 }
