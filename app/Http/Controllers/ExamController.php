@@ -99,7 +99,10 @@ class ExamController extends Controller
             return redirect()->to('/home')->with('error', 'You already participated in this exam');
         }
 
-        return view('quiz', compact('quiz', 'time', 'quizQuestions', 'authUserHasPlayedQuiz'));
+        return view('quiz', compact('quiz',
+                                    'time',
+                                    'quizQuestions',
+                                    'authUserHasPlayedQuiz'));
     }
 
     /**
@@ -115,16 +118,17 @@ class ExamController extends Controller
 
         return $userQuestionAnswer = Result::updateOrCreate(
             ['user_id'=> $authUser->id,
-            'quiz_id'=>$quizId,
-            'question_id'=>$questionId],
-            ['answer_id'=>$answerId]
+            'quiz_id' => $quizId,
+            'question_id' => $questionId],
+            ['answer_id' => $answerId]
         );
     }
 
     /**
      *
      */
-    public function viewResult($userId, $quizId){
+    public function viewResult($userId, $quizId)
+    {
         $results = Result::where('user_id', $userId)
                          ->where('quiz_id', $quizId)
                          ->get();
@@ -147,13 +151,18 @@ class ExamController extends Controller
      */
     public function userQuizResult($userId, $quizId)
     {
-        $results = Result::where('user_id', $userId)->where('quiz_id', $quizId)->get();
-        $totalQuestions = Question::where('quiz_id', $quizId)->count();
-        $attemptQuestion =Result::where('quiz_id', $quizId)
+        $results = Result::where('user_id', $userId)
+                         ->where('quiz_id', $quizId)
+                         ->get();
+
+        $totalQuestions = Question::where('quiz_id', $quizId)
+                                   ->count();
+
+        $attemptQuestion = Result::where('quiz_id', $quizId)
                                 ->where('user_id', $userId)
                                 ->count();
 
-        $quiz = Quiz::where('id',$quizId)->get();
+        $quiz = Quiz::where('id', $quizId)->get();
 
         $ans=[];
         foreach($results as $answer) {
@@ -171,6 +180,9 @@ class ExamController extends Controller
         } else {
             $percentage=0;
         }
+
+        $user = (new User)->where("id", $userId)
+                          ->first();
 
         return view('backend.result.result', compact('user',
                                                     'results',

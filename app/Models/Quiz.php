@@ -87,7 +87,7 @@ class Quiz extends Model
     {
         $attemptQuiz = [];
         $authUser = auth()->user()->id;
-        $user = Result::where('user_id',$authUser)->get();
+        $user = Result::where('user_id', $authUser)->get();
 
         foreach($user as $u) {
             array_push($attemptQuiz, $u->quiz_id);
